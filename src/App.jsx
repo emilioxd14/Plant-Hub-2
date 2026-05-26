@@ -5,7 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 import LoginView from './views/LoginView';
 import HubView from './views/HubView';
-import DetailView from './views/DetailView';
+import PlantDetailView from './views/PlantDetailView';
 import StoreView from './views/StoreView';
 import BillingView from './views/BillingView';
 import ShippingView from './views/ShippingView';
@@ -25,7 +25,7 @@ function App() {
           
           <Route path="/plant/:id" element={
             <ProtectedRoute>
-              <DetailView />
+              <PlantDetailView />
             </ProtectedRoute>
           } />
           

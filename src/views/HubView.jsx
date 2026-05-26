@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShoppingBag, LogOut, Activity, Droplets, Sun, Thermometer } from 'lucide-react';
 import { usePlantContext } from '../context/PlantContext';
 import AlertBanner from '../components/AlertBanner';
-
+import AddPlantFlow from '../components/AddPlantFlow';
 
 const HubView = () => {
   const { plants, logout } = usePlantContext();
@@ -82,6 +82,8 @@ const HubView = () => {
           </Link>
         ))}
       </div>
+
+      <AddPlantFlow />
     </div>
   );
 };

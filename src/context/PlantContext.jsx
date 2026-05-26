@@ -53,10 +53,14 @@ export const PlantProvider = ({ children }) => {
     }
   ];
 
-  const [plants] = useState(mockPlants);
+  const [plants, setPlants] = useState(mockPlants);
 
   const login = () => setIsAuthenticated(true);
   const logout = () => setIsAuthenticated(false);
+
+  const addPlant = (newPlant) => {
+    setPlants(prev => [...prev, newPlant]);
+  };
 
   const value = {
     isAuthenticated,
@@ -64,7 +68,8 @@ export const PlantProvider = ({ children }) => {
     logout,
     selectedProduct,
     setSelectedProduct,
-    plants
+    plants,
+    addPlant
   };
 
   return (

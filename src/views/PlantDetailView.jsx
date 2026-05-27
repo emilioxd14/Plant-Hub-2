@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft, Settings, Droplet, Plane, Camera, Brain } from 'lucide-react';
 import { usePlantContext } from '../context/PlantContext';
@@ -16,6 +16,7 @@ export default function PlantDetailView() {
   const { id } = useParams();
   const { plants } = usePlantContext();
   const plant = plants.find(p => p.id === id);
+  const [selectedMode, setSelectedMode] = useState('ai');
 
   if (!plant) {
     return (
@@ -118,29 +119,64 @@ export default function PlantDetailView() {
           <section className="lg:col-span-1 flex flex-col gap-4">
             <h2 className="text-lg font-medium text-white mb-2">Actuator Controls</h2>
             
-            {/* Active Card: AI Automated Target */}
-            <button className="flex items-center p-4 bg-[#121c17] border border-teal-500/50 rounded-2xl transition-all hover:bg-[#16241e] group text-left cursor-pointer shadow-lg shadow-teal-900/20">
-              <div className="p-3 bg-teal-500/20 text-teal-400 rounded-xl mr-4 group-hover:bg-teal-500/30 transition-colors">
+            {/* AI Automated Target */}
+            <button 
+              onClick={() => setSelectedMode('ai')}
+              className={`flex items-center p-4 rounded-2xl transition-all text-left cursor-pointer group ${
+                selectedMode === 'ai' 
+                  ? 'bg-[#121c17] border border-teal-500/50 shadow-lg shadow-teal-900/20 text-white' 
+                  : 'bg-[#0d1511] border border-white/5 text-gray-400 hover:text-gray-300 hover:bg-[#121c17]'
+              }`}
+            >
+              <div className={`p-3 rounded-xl mr-4 transition-colors ${
+                selectedMode === 'ai' ? 'bg-teal-500/20 text-teal-400' : 'bg-white/5 text-gray-400 group-hover:bg-white/10'
+              }`}>
                 <Settings className="w-6 h-6" />
               </div>
-              <span className="flex-1 text-white font-medium">AI Automated Target</span>
-              <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+              <span className="flex-1 font-medium">AI Automated Target</span>
+              {selectedMode === 'ai' && (
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+              )}
             </button>
 
-            {/* Inactive Card: Manual Override */}
-            <button className="flex items-center p-4 bg-[#0d1511] border border-white/5 rounded-2xl transition-all hover:bg-[#121c17] text-left text-gray-400 hover:text-gray-300">
-              <div className="p-3 bg-white/5 rounded-xl mr-4 transition-colors group-hover:bg-white/10">
+            {/* Manual Override */}
+            <button 
+              onClick={() => setSelectedMode('manual')}
+              className={`flex items-center p-4 rounded-2xl transition-all text-left cursor-pointer group ${
+                selectedMode === 'manual' 
+                  ? 'bg-[#121c17] border border-teal-500/50 shadow-lg shadow-teal-900/20 text-white' 
+                  : 'bg-[#0d1511] border border-white/5 text-gray-400 hover:text-gray-300 hover:bg-[#121c17]'
+              }`}
+            >
+              <div className={`p-3 rounded-xl mr-4 transition-colors ${
+                selectedMode === 'manual' ? 'bg-teal-500/20 text-teal-400' : 'bg-white/5 text-gray-400 group-hover:bg-white/10'
+              }`}>
                 <Droplet className="w-6 h-6" />
               </div>
               <span className="flex-1 font-medium">Manual Override</span>
+              {selectedMode === 'manual' && (
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+              )}
             </button>
 
-            {/* Inactive Card: Vacation Mode */}
-            <button className="flex items-center p-4 bg-[#0d1511] border border-white/5 rounded-2xl transition-all hover:bg-[#121c17] text-left text-gray-400 hover:text-gray-300">
-              <div className="p-3 bg-white/5 rounded-xl mr-4 transition-colors group-hover:bg-white/10">
+            {/* Vacation Mode */}
+            <button 
+              onClick={() => setSelectedMode('vacation')}
+              className={`flex items-center p-4 rounded-2xl transition-all text-left cursor-pointer group ${
+                selectedMode === 'vacation' 
+                  ? 'bg-[#121c17] border border-teal-500/50 shadow-lg shadow-teal-900/20 text-white' 
+                  : 'bg-[#0d1511] border border-white/5 text-gray-400 hover:text-gray-300 hover:bg-[#121c17]'
+              }`}
+            >
+              <div className={`p-3 rounded-xl mr-4 transition-colors ${
+                selectedMode === 'vacation' ? 'bg-teal-500/20 text-teal-400' : 'bg-white/5 text-gray-400 group-hover:bg-white/10'
+              }`}>
                 <Plane className="w-6 h-6" />
               </div>
               <span className="flex-1 font-medium">Vacation Mode</span>
+              {selectedMode === 'vacation' && (
+                <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></div>
+              )}
             </button>
           </section>
 
